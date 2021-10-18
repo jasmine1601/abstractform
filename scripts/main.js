@@ -27,23 +27,30 @@ button.addEventListener("click", () => {
     // document.getElementById("header").appendChild(aform)
     // console.log(aform)
     console.log(option.value)
-    form = document.createElement("form")
+    let form = document.createElement("form")
     form.name = "abstract"
     form.method = "post"
     form.id = "abstract"
     form.action = reqUrl
-
+    let h1 = document.createElement("h1")
+    h1.innerText = `${form.name} form`
+    form.appendChild(h1)
+    
     for (key in json) {
-        value = (typeof json[key] == "object" ? JSON.stringify(json[key]) : json[key])
-        ip = document.createElement("input")
+        let value = (typeof json[key] == "object" ? JSON.stringify(json[key]) : json[key])
+        let ip = document.createElement("input")
         ip.name = key
         ip.value = value
-        form.appendChild(ip)
+        
+        let label = document.createElement("label")
+        label.innerText = key + ": "
+        label.appendChild(ip)
+        form.appendChild(label)
     }
     if (option.value === "op-a") {
         submit = document.createElement("button")
         submit.type = "submit"
-        submit.innerHTML = "press"
+        submit.innerHTML = "Submit"
         form.appendChild(submit)
     } else {
         form.style.display = "none"
